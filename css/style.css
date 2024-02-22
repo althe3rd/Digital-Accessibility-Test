@@ -34,6 +34,9 @@ footer {
     padding: 30px;
 }
 
+
+/* elements */
+
 a.button {
     display: inline-block;
     padding: 10px 20px;
@@ -88,3 +91,15 @@ a.button {
     display: block;
   }
   
+
+  .gridGroup {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+  }
+
+  .gridGroup .gridItem {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+  }
