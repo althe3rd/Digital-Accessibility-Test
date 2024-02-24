@@ -30,7 +30,10 @@ jobs:
         run: ls -la ${{ github.workspace }}/dist  # Keep this for visibility
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: peaceiris/actions-gh-pages@v4
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ github.workspace }}/dist
-          destination_dir: . # Deploy to the root of your Pages site
+          publish_branch: gh-pages # Replace with your desired publish branch
+          debug: true # Optional: Enable debugging for more detailed logs
+
