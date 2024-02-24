@@ -34,6 +34,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
+          # 'path' should point to the directory with the files you want to deploy.
 
   deploy:
     needs: build
