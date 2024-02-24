@@ -30,7 +30,7 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build --if-present
-      - name: Upload dist folder
+      - name: Upload dist folder contents
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
@@ -41,16 +41,12 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download dist folder
+      - name: Download dist folder contents
         uses: actions/download-artifact@v4
         with:
           name: github-pages
-      - name: Unpack and move to root
-        run: |
-          mkdir temp_dir
-          mv github-pages/* temp_dir/
-          mv temp_dir/dist/* .
-          rm -rf temp_dir
+      - name: List files for debug
+        run: ls -lR
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
     environment:
