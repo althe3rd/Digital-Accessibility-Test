@@ -26,20 +26,11 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Archive build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: dist
-
-      - name: List deployed files
-        run: ls -la ${{ github.workspace }}/dist  
+      - name: List deployed files (optional)
+        run: ls -la ${{ github.workspace }}/dist  # Keep this for visibility
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/deploy-pages@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ github.workspace }}/dist
-          debug: true
-          publish: true
-
+          destination_dir: . # Deploy to the root of your Pages site
