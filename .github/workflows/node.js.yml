@@ -33,8 +33,7 @@ jobs:
       - name: Upload build artifacts for GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
-          path: dist/**/*
-          # No need for retention-days as this is specifically for GitHub Pages deployment
+          path: dist/
 
   deploy:
     needs: build
