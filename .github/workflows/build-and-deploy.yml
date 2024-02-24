@@ -2,7 +2,12 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "primary" ]
+
+permissions:
+    contents: write
+    pages: write
+    id-token: write
 
 jobs:
   build-and-deploy:
