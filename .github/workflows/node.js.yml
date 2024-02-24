@@ -34,26 +34,24 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: dist/
+          path: dist/**/*
           retention-days: 1
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Download dist folder
         uses: actions/download-artifact@v4
         with:
           name: github-pages
-          path: .
-      - name: List files for debug
-        run: ls -lR        
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Unpack and move to root
+        run: |
+          mkdir temp_dir
+          mv github-pages/* temp_dir/
+          mv temp_dir/dist/* .
+          rm -rf temp_dir
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
     environment:
       name: github-pages
