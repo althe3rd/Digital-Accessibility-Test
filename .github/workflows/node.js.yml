@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - name: Upload dist folder
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: dist-artifact
           path: dist/
@@ -55,4 +55,3 @@ jobs:
         uses: actions/deploy-pages@v4
     environment:
       name: github-pages
-      # The URL is dynamically generated and can be used in subsequent steps or jobs if needed.
