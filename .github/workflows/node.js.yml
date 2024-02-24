@@ -30,25 +30,16 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build --if-present
-      - name: List contents of dist directory
-        run: ls -lahR dist/
-      - name: Upload dist folder contents
+      - name: Upload build artifacts for GitHub Pages
         uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
           path: dist/**/*
-          retention-days: 1
+          # No need for retention-days as this is specifically for GitHub Pages deployment
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download dist folder contents
-        uses: actions/download-pages-artifact@v1
-        with:
-          name: github-pages
-      - name: List files for debug
-        run: ls -lR
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
     environment:
