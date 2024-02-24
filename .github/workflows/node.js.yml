@@ -48,6 +48,8 @@ jobs:
         with:
           name: dist-artifact
           path: .
+      - name: List files for debug
+        run: ls -lR        
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Deploy to GitHub Pages
