@@ -34,6 +34,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ${{ github.workspace }}/dist
-          publish_branch: gh-pages # Replace with your desired publish branch
+          publish_branch: primary # Replace with your desired publish branch
           debug: true # Optional: Enable debugging for more detailed logs
 
