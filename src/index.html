@@ -37,7 +37,7 @@
   <main>
     <div class="contentWidth">  
       <h1>About</h1>
-      <p>This is a <a href="/">digital accessibility test</a>. Please review the page and try to determine what on this page needs to be fixed to pass WCAG 2.1 AA standards.</p>
+      <p>This is a <a href="/">digital accessibility test</a>. Please review the entire page and try to determine what needs to be fixed to pass WCAG 2.1 AA standards.</p>
     
       <a href="https://it.wisc.edu/digital-accessibility/" class="button">Learn More About Digital Accessibility</a>
       <a href="https://www.w3.org/" class="button secondary" aria-hidden="true">Visit the W3C</a>
@@ -106,8 +106,29 @@
     </div>
   </footer>
   
-
-  <script src="js/app.js"></script>
+  <script>
+    function openTab(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+  
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  </script>
+  <!--<script src="js/app.js"></script>-->
 
 </body>
 
