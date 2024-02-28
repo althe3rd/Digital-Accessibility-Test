@@ -30,40 +30,46 @@
     <div class="contentWidth">
       <h1>Digital Accessibility Test</h1>
     </div>
+
+    <div class="imageBanner"></div>
   </header>
 
   <main>
     <div class="contentWidth">  
       <h1>About</h1>
-      <p>This is a digital accessibility test. Please review the page and try to determine what on this page needs to be fixed to pass WCAG 2.1 AA standards.</p>
+      <p>This is a <a href="/">digital accessibility test</a>. Please review the page and try to determine what on this page needs to be fixed to pass WCAG 2.1 AA standards.</p>
     
       <a href="https://it.wisc.edu/digital-accessibility/" class="button">Learn More About Digital Accessibility</a>
+      <a href="https://www.w3.org/" class="button secondary" aria-hidden="true">Visit the W3C</a>
     </div>
 
   
     <div class="contentWidth">
       <h2>CSS Grid</h2>
-      <p>Can you give guidance on what is wrong with this content?</p>
+      <p class="smallText">Please review the content below to determine what issues are present.</p>
 
       <div class="gridGroup">
         <div class="gridItem">
           <h3>Grid Item 1</h3>
           <p>This is a grid item. It should be in a grid.</p>
-        </div>
-        <div class="gridItem">
-          <h3>Grid Item 2</h3>
-          <p>This is a grid item. It should be in a grid.</p>
+          <a href="https://it.wisc.edu/digital-accessibility/" target="_blank">Learn More</a>
         </div>
         <div class="gridItem">
           <h3>Grid Item 3</h3>
           <p>This is a grid item. It should be in a grid.</p>
+          <a href="https://it.wisc.edu/digital-accessibility/" target="_blank">Learn More</a>
+        </div>
+        <div class="gridItem">
+          <h3>Grid Item 2</h3>
+          <p>This is a grid item. It should be in a grid.</p>
+          <a href="https://it.wisc.edu/digital-accessibility/" target="_blank">Learn More</a>
         </div>
       </div>
     </div>
 
 
     <div class="tabs contentWidth">
-        <h2>Tabs</h2>
+        <h4>Tabs</h4>
         <div class="tab">
           <button class="tablinks active" onclick="openTab(event, 'Tab1')">Tab 1</button>
           <button class="tablinks" onclick="openTab(event, 'Tab2')">Tab 2</button>
@@ -78,15 +84,20 @@
         <div id="Tab2" class="tabcontent">
           <h3>Tab 2</h3>
           <p>This is content for Tab 2.</p>
+          
+          <img src="img/laptop-work.jpg" alt="a desk" />
         </div>
         
         <div id="Tab3" class="tabcontent">
           <h3>Tab 3</h3>
           <p>This is content for Tab 3.</p>
+          <a href="https://it.wisc.edu/digital-accessibility/" target="_blank">Visit it.wisc.edu for more information.</a>
         </div>
       </div>
     
     </div>
+
+    <div class="subTitle">Determine what barriers are present. <img src="img/downarrow.png" /></div>
   </main>
 
   <footer>
