@@ -1,0 +1,86 @@
+stages:
+  - build
+  - test
+  - deploy
+
+# Cache dependencies for faster builds
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+    - .npm/
+
+# Build job
+build:
+  stage: build
+  image: node:18
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+
+# Accessibility testing job
+a11y_test:
+  stage: test
+  image: node:18
+  services:
+    - name: nginx:alpine
+      alias: web-server
+  script:
+    - npm install
+    # Copy build files to nginx for testing
+    - mkdir -p /tmp/build
+    - cp -r build/* /tmp/build
+    - echo "Copying build files to web server..."
+    - apt-get update && apt-get install -y rsync
+    - rsync -av /tmp/build/* /usr/share/nginx/html/
+    # Install chromium dependencies for puppeteer
+    - apt-get install -y chromium libgbm1
+    # Wait for server to be ready
+    - sleep 5
+    # Run accessibility tests
+    - echo "Running accessibility tests..."
+    - npx @axe-core/cli http://web-server --tags wcag2a,wcag2aa --exit --impact=serious,critical > axe-results.txt || true
+    # Check for serious or critical issues
+    - |
+      if grep -q "critical\|serious" axe-results.txt; then
+        echo "❌ Accessibility tests failed with serious or critical issues"
+        cat axe-results.txt
+        exit 1
+      else
+        echo "✅ No serious or critical accessibility issues found"
+        cat axe-results.txt
+      fi
+  dependencies:
+    - build
+  artifacts:
+    paths:
+      - axe-results.txt
+    when: always
+    expire_in: 1 week
+
+# Simulated deployment job (only runs if tests pass)
+deploy_simulation:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - echo "✅ All tests passed! Simulating deployment..."
+    - echo "📦 Preparing deployment package..."
+    - sleep 2
+    - echo "🚀 Deploying to production server..."
+    - sleep 2
+    - echo "🎉 Deployment successful! Site would now be live."
+    - echo "📊 You can see the a11y test results in the test job artifacts."
+  dependencies:
+    - build
+    - a11y_test
+  # Only run this job if a11y_test succeeds
+  needs:
+    - job: a11y_test
+      artifacts: true
+  # This would be replaced with real deployment configuration
+  # when you have an actual deployment target
+  when: on_success 
