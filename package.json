@@ -3,10 +3,15 @@
     "@parcel/packager-raw-url": "^2.11.0",
     "@parcel/transformer-sass": "^2.11.0",
     "@parcel/transformer-webmanifest": "^2.11.0",
-    "parcel": "^2.11.0"
+    "parcel": "^2.11.0",
+    "@axe-core/cli": "^4.8.2",
+    "http-server": "^14.1.1"
   },
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html --public-url ./ --dist-dir ./build --no-optimize"
+    "build": "parcel build src/index.html --public-url ./ --dist-dir ./build --no-optimize",
+    "test:a11y": "axe http://localhost:1234 --tags wcag2a,wcag2aa --verbose",
+    "test:a11y:build": "axe build/index.html --tags wcag2a,wcag2aa --verbose",
+    "test:a11y:file": "axe src/index.html --tags wcag2a,wcag2aa --verbose"
   }
 }
