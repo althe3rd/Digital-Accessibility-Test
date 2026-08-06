@@ -1,0 +1,72 @@
+name: Accessibility Report
+
+# This site intentionally contains WCAG violations - it is a fixture for
+# evaluating candidates. This workflow reports what axe finds so the expected
+# barriers can be tracked, but it never fails the build and never deploys.
+# Deployment to GitHub Pages is handled entirely by static.yml.
+
+on:
+  push:
+    branches: [ primary ]
+  pull_request:
+    branches: [ primary ]
+  workflow_dispatch:
+
+jobs:
+  a11y-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build site
+        run: npm run build
+
+      - name: Install Chrome headless dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev
+
+      - name: Run accessibility scan
+        continue-on-error: true
+        run: |
+          npx http-server ./build -p 8080 --silent &
+
+          # Wait for the server to answer rather than guessing with sleep
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:8080 > /dev/null && break
+            sleep 1
+          done
+
+          # No --exit flag: violations are expected here and must not fail the job
+          npx @axe-core/cli http://localhost:8080 --tags wcag2a,wcag2aa --verbose | tee axe-results.txt
+
+      - name: Publish findings to job summary
+        if: always()
+        run: |
+          {
+            echo '## axe-core findings (WCAG 2.1 A/AA)'
+            echo ''
+            echo '_These violations are intentional. This site is a test fixture._'
+            echo ''
+            echo '```'
+            cat axe-results.txt 2>/dev/null || echo 'No results file was produced.'
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: axe-results
+          path: axe-results.txt
+          if-no-files-found: warn
