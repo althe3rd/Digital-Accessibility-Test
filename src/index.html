@@ -97,12 +97,48 @@
     
     </div>
 
+    <div class="contentWidth">
+      <h2>Contact Us</h2>
+      <p class="smallText">Fill out the form below and we will get back to you.</p>
+
+      <form class="contactForm" action="#">
+        <div class="formRow">
+          <span class="formLabel">Full Name</span>
+          <input type="text" id="name" name="name">
+        </div>
+
+        <div class="formRow">
+          <span class="formLabel required">Email Address</span>
+          <input type="text" id="emailField" name="email">
+        </div>
+
+        <div class="formRow">
+          <input type="text" id="phone" name="phone" placeholder="Phone Number">
+        </div>
+
+        <div class="formRow">
+          <span class="formLabel">How should we contact you?</span>
+          <input type="radio" id="byEmail" name="contactMethod" value="email"> Email
+          <input type="radio" id="byPhone" name="contactMethod" value="phone"> Phone
+        </div>
+
+        <div class="formRow">
+          <label>Comments</label>
+          <textarea id="comments" name="comments" rows="4"></textarea>
+        </div>
+
+        <div class="formRow">
+          <div class="formSubmit" onclick="this.closest('form').submit()">Submit</div>
+        </div>
+      </form>
+    </div>
+
     <div class="subTitle">Determine what barriers are present. <img src="img/downarrow.png" /></div>
   </main>
 
   <footer>
     <div class="contentWidth">
-      <p>&copy; 2025 Digital Accessibility Test</p>
+      <p>&copy; 2026 Digital Accessibility Test</p>
     </div>
   </footer>
   

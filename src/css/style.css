@@ -235,3 +235,76 @@ a.button.secondary {
   .gridGroup .gridItem:nth-child(2) {
     order: 1;
   }
+
+  /* contact form */
+  .contactForm {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ccc;
+    max-width: 600px;
+  }
+
+  .contactForm .formRow {
+    margin-bottom: 20px;
+  }
+
+  .contactForm .formRow:last-child {
+    margin-bottom: 0;
+  }
+
+  .contactForm .formLabel,
+  .contactForm label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--main-text-color);
+  }
+
+  .contactForm .formLabel.required {
+    color: #d43f3f;
+  }
+
+  .contactForm input[type="text"],
+  .contactForm textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    background-color: #fff;
+    color: var(--main-text-color);
+    font-family: inherit;
+    font-size: 1em;
+  }
+
+  .contactForm textarea {
+    resize: vertical;
+  }
+
+  .contactForm input[type="radio"] {
+    margin: 0 6px 0 0;
+  }
+
+  .contactForm input[type="radio"] ~ input[type="radio"] {
+    margin-left: 20px;
+  }
+
+  .contactForm input[type="text"]:focus,
+  .contactForm textarea:focus {
+    outline: none;
+  }
+
+  .contactForm .formSubmit {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: var(--main-button-border-radius);
+    color: var(--main-button-text-color);
+    background-color: var(--main-button-bg-color);
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .contactForm .formSubmit:hover {
+    background-color: var(--main-button-hover-bg-color);
+    color: var(--main-button-hover-text-color);
+  }
